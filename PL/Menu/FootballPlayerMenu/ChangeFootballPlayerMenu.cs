@@ -24,20 +24,26 @@ namespace PL
         protected override void SetupViewQueue()
         {
             AddView("========== Change Football Player ==========");
-            AddEnumView(typeof(Health));
+            AddView("new name: ", true);
+            AddView("new surname: ", true);
+            AddEnumView(typeof(Status));
             AddView("new status: ", true);
             AddView("new salary: ", true);
+            AddEnumView(typeof(Health));
             AddView("new health: ", true);
+            AddView("new born: ", true);
         }
 
         protected override void OnInputFilled(string[] inputs)
         {
-            var fieldCollection = new FieldCollection(2);
-
-            fieldCollection.Add("Health", Enum.Parse<Health>(inputs[0]));
-            fieldCollection.Add("Salary", inputs[1]);
-            fieldCollection.Add("Status", new TimeSpan(Convert.ToInt32(inputs[2]), 0, 0));
-
+          
+            var fieldCollection = new FieldCollection(6);
+            fieldCollection.Add("Name", inputs[0]);
+            fieldCollection.Add("Surname", inputs[1]);
+            fieldCollection.Add("Status", Enum.Parse<Status>(inputs[2]));
+            fieldCollection.Add("Salary", inputs[3]);
+            fieldCollection.Add("Health", Enum.Parse<Health>(inputs[4]));
+            fieldCollection.Add("Born", DateTime.Parse(inputs[5]));
             _service.Change(_fields, fieldCollection);
         }
     }

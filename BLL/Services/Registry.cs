@@ -4,7 +4,7 @@ using DAL;
 
 namespace BLL
 {
-    public class Registry : IFootBallService, IPatientService
+    public class Registry : IFootBallService, IGameService
     {
         private DataContext _context;
 
@@ -17,6 +17,7 @@ namespace BLL
 
             _pathes = new Dictionary<Type, string>();
             _pathes.Add(typeof(FootballPlayer), "footballPlayer.txt");
+            _pathes.Add(typeof(FootballGame), "footballGame.txt");
         }
 
         public void Add<T>(FieldCollection parameters) where T : IInitializable

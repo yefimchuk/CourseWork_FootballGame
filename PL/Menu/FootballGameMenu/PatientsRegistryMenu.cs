@@ -6,7 +6,7 @@ namespace PL
 {
     class PatientsRegistryMenu : StaticMenu
     {
-        private IPatientService _service;
+        private IGameService _service;
 
         protected override void Init(MenuInitArgs initArgs)
         {
@@ -23,24 +23,24 @@ namespace PL
         {
             binds.Add(ConsoleKey.D1, RunAddMenu);
             binds.Add(ConsoleKey.D2, RunDeleteMenu);
-            binds.Add(ConsoleKey.D3, RunChangeCardMenu);
+            binds.Add(ConsoleKey.D3, RunChangeDataMenu);
 
             BindExit(ConsoleKey.Q);
         }
 
         protected override void SetupView(List<string> view)
         {
-            view.Add("========== Patients Registry ==========");
-            view.Add("1) Add");
-            view.Add("2) Delete");
-            view.Add("3) Change card");
+            view.Add("- - - - - - - - - - - - Football Game registry - - - - - - - - - - - - - -");
+            view.Add("1) Add game");
+            view.Add("2) Delete game");
+            view.Add("3) Change data of game menu");
             view.Add("Q) Back");
         }
 
-        private void RunAddMenu() => Run<AddPatientMenu>(new PatientRegistryMenuInitArgs(_service));
+        private void RunAddMenu() => Run<AddGamenMenu>(new PatientRegistryMenuInitArgs(_service));
+        private void RunDeleteMenu() => Run<DeleteFootballPlayer>(new PatientRegistryMenuInitArgs(_service)); 
 
-        private void RunDeleteMenu() { }
-
-        private void RunChangeCardMenu() { }
+        private void RunChangeDataMenu() { }
     }
+
 }

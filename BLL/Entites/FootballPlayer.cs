@@ -73,8 +73,20 @@ namespace BLL
         }
         void IChangeable.Change(FieldCollection parameters)
         {
+            if (parameters["Name"] != null)
+            {
+                _name = parameters["Name"];
+            }
+            if (parameters["Surname"] != null)
+            {
+                _name = parameters["Surname"];
+            }
+            _surname = parameters["Surname"];
             _salary = parameters["Salary"];
             _status = parameters["Status"];
+            _health = parameters["Health"];
+            _born = parameters["Born"];
+
         }
         bool IFieldComparable.IsMatch(FieldCollection fields)
         {

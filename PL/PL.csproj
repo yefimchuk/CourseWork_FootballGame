@@ -9,8 +9,4 @@
     <ProjectReference Include="..\BLL\BLL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Menu\FootballGameMenu\" />
-  </ItemGroup>
-
 </Project>
