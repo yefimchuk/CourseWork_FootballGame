@@ -23,8 +23,8 @@ namespace PL
         {
             view.Add("---------- Main Menu ----------");
             view.Add("1) Player control");
-            view.Add("2) Patients Registry");
-            view.Add("3) Schedule Management");
+            view.Add("2) Game control");
+            view.Add("3) Stadion control");
             view.Add("Q) Exit");
         }
 

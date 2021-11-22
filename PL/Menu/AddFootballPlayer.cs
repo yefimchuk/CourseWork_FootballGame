@@ -24,8 +24,8 @@ namespace PL
             AddView("Name: ", true);
             AddView("Surname: ", true);
             AddView("Born: ", true);
-            AddView("Status: ", true);
-            AddView("Health: ", true);
+            AddView("Status( 0 - perfect, 1 - good, 2 - damaged, 3 - tired, 4 - cantPlay): ", true);
+            AddView("Health (0 - sick, 1 - healthy): ", true);
             AddView("Salary: ", true);
         }
 

@@ -16,7 +16,7 @@ namespace BLL
             _context = new DataContext();
 
             _pathes = new Dictionary<Type, string>();
-            _pathes.Add(typeof(FootballPlayer), "doctorsRegistry.txt");
+            _pathes.Add(typeof(FootballPlayer),"footballPlayer.txt");
           
         }
 

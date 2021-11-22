@@ -32,13 +32,13 @@ namespace BLL
             _name = info.GetString("Name");
             _surname = info.GetString("Surname");
             _born = (DateTime)info.GetValue("Born", typeof(DateTime));
+            _status = (Status)info.GetValue("Status", typeof(Status));
             _health = (Health) info.GetValue("Health", typeof(Health));
-            _status = (Status) info.GetValue("Status", typeof(Status));
             _salary = info.GetString("Salary");
 
         }
 
-        public new void GetObjectData(SerializationInfo info, StreamingContext context)
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
 
             info.AddValue("Name", _name);
@@ -50,7 +50,7 @@ namespace BLL
 
         }
 
-        public new void Initialize(FieldInitializer initializer)
+        public void Initialize(FieldInitializer initializer)
         {
             _salary = initializer["Salary"];
             _name = initializer["Name"];
