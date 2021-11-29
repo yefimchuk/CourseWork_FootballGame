@@ -6,7 +6,7 @@ namespace PL
 {
     public class DoctorsRegistryMenu : StaticMenu
     {
-        private IDoctorService _service;
+        private IFootBallService _service;
 
         protected override void Init(MenuInitArgs initArgs)
         {
@@ -51,9 +51,7 @@ namespace PL
 
         }
 
-        private void RunShowMenu()
-        {
+        private void RunShowMenu() => Run<ShowFootballPlayerMenu>(new RegistryMenuInitArgs(_service as Registry));
 
-        }
     }
 }

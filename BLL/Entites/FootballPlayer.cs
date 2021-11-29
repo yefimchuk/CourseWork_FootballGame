@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace BLL
 {
     [Serializable]
-    public sealed class FootballPlayer: ISerializable, IInitializable
+    public sealed class FootballPlayer: ISerializable, IInitializable, IChangeable, IDemonstrated, IFieldComparable
     {
         private string _name;
         private string _surname;
@@ -50,7 +50,7 @@ namespace BLL
 
         }
 
-        public void Initialize(FieldInitializer initializer)
+        public void Initialize(FieldCollection initializer)
         {
             _salary = initializer["Salary"];
             _name = initializer["Name"];
@@ -59,6 +59,24 @@ namespace BLL
 
 
         }
-           
+
+
+        public string GetDemonstrationString()
+        {
+            return $"Name: {_name}\n"
+                + $"Surname: {_surname}\n"
+                +$"Salary: {_salary}\n"
+                +$"Status: {_status}\n";
+        }
+        void IChangeable.Change(FieldCollection parameters)
+        {
+            _salary = parameters["Salary"];
+            _status = parameters["Status"];
+        }
+        bool IFieldComparable.IsMatch(FieldCollection fields)
+        {
+            return _name == fields["Name"]
+                && _surname == fields["Surname"];
+        }
     }
 }

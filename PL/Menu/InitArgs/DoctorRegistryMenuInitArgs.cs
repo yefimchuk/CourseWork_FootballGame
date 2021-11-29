@@ -4,8 +4,8 @@ namespace PL
 {
     public class DoctorRegistryMenuInitArgs : MenuInitArgs
     {
-        public readonly IDoctorService service;
+        public readonly IFootBallService service;
 
-        public DoctorRegistryMenuInitArgs(IDoctorService service) => this.service = service;
+        public DoctorRegistryMenuInitArgs(IFootBallService service) => this.service = service;
     }
 }

@@ -5,7 +5,7 @@ namespace PL
 {
     public class AddFootballPlayer : InitializationMenu
     {
-        private IDoctorService _service;
+        private IFootBallService _service;
 
         protected override void Init(MenuInitArgs initArgs)
         {
@@ -31,7 +31,7 @@ namespace PL
 
         protected override void OnInputFilled(string[] inputs)
         {
-            FieldInitializer parameters = new FieldInitializer(4);
+            FieldCollection parameters = new FieldCollection(6);
 
             parameters.Add("Name", inputs[0]);
             parameters.Add("Surname", inputs[1]);

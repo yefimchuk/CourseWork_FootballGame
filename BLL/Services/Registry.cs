@@ -4,7 +4,7 @@ using DAL;
 
 namespace BLL
 {
-    public class Registry : IDoctorService, IPatientService
+    public class Registry : IFootBallService, IPatientService
     {
         private DataContext _context;
 
@@ -16,11 +16,10 @@ namespace BLL
             _context = new DataContext();
 
             _pathes = new Dictionary<Type, string>();
-            _pathes.Add(typeof(FootballPlayer),"footballPlayer.txt");
-          
+            _pathes.Add(typeof(FootballPlayer), "footballPlayer.txt");
         }
 
-        public void Add<T>(FieldInitializer parameters) where T : IInitializable
+        public void Add<T>(FieldCollection parameters) where T : IInitializable
         {
             var newEntity = Activator.CreateInstance(typeof(T)) as IInitializable;
 
@@ -31,19 +30,70 @@ namespace BLL
             }
         }
 
-        public void Delete<T>(T entity)
+        public FootballPlayer[] GetAllDoctors() => _context.Deserialize(_pathes[typeof(FootballPlayer)]).ToArray<FootballPlayer>();
+
+        public void Delete<T>(FieldCollection parameters) where T : IFieldComparable
+        {
+            var entities = _context.Deserialize(_pathes[typeof(T)]).ToArray<IFieldComparable>();
+            var newEntitiesArray = Delete(entities, parameters);
+
+            _context.Serialize(_pathes[typeof(T)], newEntitiesArray, false);
+        }
+
+        public void Change(FieldCollection parameters, FieldCollection newParameters)
+        {
+            var entities = _context.Deserialize(_pathes[typeof(FootballPlayer)]).ToArray<IFieldComparable>();
+            var footballPlayer = FindFirst<FootballPlayer>(entities, parameters);
+
+            if (CanBeChaged(footballPlayer) == false)
+                throw new Exception(); // TODO создать кастомное исключение
+
+            Change(footballPlayer, newParameters);
+
+            Delete<FootballPlayer>(parameters);
+            _context.Serialize(_pathes[typeof(FootballPlayer)], footballPlayer);
+        }
+
+
+
+        public FootballPlayer[] ReceiveAll() => _context.Deserialize(_pathes[typeof(FootballPlayer)]).ToArray<FootballPlayer>();
+
+        private object[] Delete(IFieldComparable[] from, FieldCollection parameters)
+        {
+            List<object> newEntities = new List<object>();
+
+            foreach (var entity in from)
+                if (entity.IsMatch(parameters) == false)
+                    newEntities.Add(entity);
+
+            return newEntities.ToArray();
+        }
+
+        public void DeleteDoctors()
         {
             throw new NotImplementedException();
         }
 
-        public void Chande(FootballPlayer doctor)
-        {
-            throw new NotImplementedException();
+        private T FindFirst<T>(IFieldComparable[] from, FieldCollection parameters) where T : IFieldComparable
+        { 
+            foreach (var entity in from)
+                if (entity.IsMatch(parameters))
+                    return (T)entity;
+
+            return default;
         }
 
-      /*  public void ChangeCard(Patient patient)
+        private void Change(in IChangeable initializable, FieldCollection parameters)
         {
-            throw new NotImplementedException();
-        }*/
+            initializable.Change(parameters);
+        }
+
+        private bool CanBeChaged(FootballPlayer footballPlayer)
+        {
+            // TODO проверить нет ли записае, если есть то данные нельзя поменять 
+            //throw new NotImplementedException();
+
+            return true;
+        }
     }
 }

@@ -42,17 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entites\FootballPlayer.cs" />
+    <Compile Include="Entites\IChangeable.cs" />
+    <Compile Include="Entites\IDemonstrated.cs" />
+    <Compile Include="Entites\IFieldComparable.cs" />
     <Compile Include="Entites\IInitializable.cs" />
+    <Compile Include="Extention\ArrayExtension.cs" />
     <Compile Include="Services\MainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Interfaces\IDoctorService.cs" />
+    <Compile Include="Services\Interfaces\IFootBallService.cs" />
     <Compile Include="Services\Interfaces\IPatientService.cs" />
     <Compile Include="Services\Interfaces\IService.cs" />
     <Compile Include="Services\Registry.cs" />
     <Compile Include="Types\Appointment.cs" />
+    <Compile Include="Types\FieldCollection.cs" />
     <Compile Include="Types\Health.cs" />
     <Compile Include="Types\FieldInfo.cs" />
-    <Compile Include="Types\FieldInitializer.cs" />
     <Compile Include="Types\MedicalCard.cs" />
     <Compile Include="Types\Status.cs" />
     <Compile Include="Types\WorkTime.cs" />

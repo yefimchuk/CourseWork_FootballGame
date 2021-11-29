@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class FieldInitializer
+    public class FieldCollection
     {
         private List<FieldInfo> _fields;
 
-        public FieldInitializer(int initCapacity) => _fields = new List<FieldInfo>(4);
+        public FieldCollection(int initCapacity) => _fields = new List<FieldInfo>(initCapacity);
 
         public dynamic this[string name] => _fields.Find(fi => fi.name == name).value;
 

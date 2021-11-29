@@ -8,6 +8,6 @@ namespace BLL
 {
     public interface IInitializable
     {
-        void Initialize(FieldInitializer initializer);
+        void Initialize(FieldCollection initializer);
     }
 }

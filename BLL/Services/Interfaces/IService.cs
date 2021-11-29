@@ -3,8 +3,7 @@ namespace BLL
 {
     public interface IService
     {
-
-        void Add<T>(FieldInitializer parameters) where T : IInitializable;
-        void Delete<T>(T entity);
+        void Add<T>(FieldCollection parameters) where T : IInitializable;
+        void Delete<T>(FieldCollection parameters) where T : IFieldComparable;
     }
 }
