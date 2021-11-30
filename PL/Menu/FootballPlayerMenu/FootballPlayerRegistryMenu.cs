@@ -4,7 +4,7 @@ using BLL;
 
 namespace PL
 {
-    public class DoctorsRegistryMenu : StaticMenu
+    public class FootballPlayerRegistryMenu : StaticMenu
     {
         private IFootBallService _service;
 
@@ -41,10 +41,7 @@ namespace PL
 
         private void RunAddMenu() => Run<AddFootballPlayer>(new DoctorRegistryMenuInitArgs(_service));
 
-        private void RunDeleteMenu()
-        {
-
-        }
+        private void RunDeleteMenu() => Run<DeleteFootballPlayer>(new DoctorRegistryMenuInitArgs(_service)); //_service.DeleteDoctors();
 
         private void RunChangeMenu()
         {

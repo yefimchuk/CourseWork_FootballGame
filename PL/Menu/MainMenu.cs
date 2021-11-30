@@ -28,7 +28,7 @@ namespace PL
             view.Add("Q) Exit");
         }
 
-        private void RunDoctorsRegistry() => Run<DoctorsRegistryMenu>(new DoctorRegistryMenuInitArgs(_registry));
+        private void RunDoctorsRegistry() => Run<FootballPlayerRegistryMenu>(new DoctorRegistryMenuInitArgs(_registry));
 
         private void RunPatientRegistry() => Run<PatientsRegistryMenu>(new PatientRegistryMenuInitArgs(_registry));
 
