@@ -43,10 +43,7 @@ namespace PL
 
         private void RunDeleteMenu() => Run<DeleteFootballPlayer>(new DoctorRegistryMenuInitArgs(_service)); //_service.DeleteDoctors();
 
-        private void RunChangeMenu()
-        {
-
-        }
+        private void RunChangeMenu() => Run<SelectFootballPlayerMenu>(new DoctorRegistryMenuInitArgs(_service));
 
         private void RunShowMenu() => Run<ShowFootballPlayerMenu>(new RegistryMenuInitArgs(_service as Registry));
 

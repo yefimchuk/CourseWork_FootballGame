@@ -28,6 +28,19 @@ namespace PL
                 ? _maxPosition - 1 
                 : _maxPosition));
         }
+        protected void AddEnumView(Type type)
+        {
+            if (type.IsEnum)
+            {
+                string[] names = Enum.GetNames(type);
+                string newLine = string.Empty;
+
+                for (int i = 0; i < names.Length; i++)
+                    newLine += $"[{names[i]}: {i}]\n";
+
+                _view.Add(new ViewElement(newLine, _maxPosition));
+            }
+        }
 
         protected override void Draw()
         {

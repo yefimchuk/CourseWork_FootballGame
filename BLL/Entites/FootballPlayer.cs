@@ -56,6 +56,7 @@ namespace BLL
             _name = initializer["Name"];
             _surname = initializer["Surname"];
             _status = initializer["Status"];
+            _born = initializer["Born"];
 
 
         }
@@ -66,7 +67,9 @@ namespace BLL
             return $"Name: {_name}\n"
                 + $"Surname: {_surname}\n"
                 +$"Salary: {_salary}\n"
-                +$"Status: {_status}\n";
+                +$"Status: {_status}\n"
+                + $"Born: {_born}\n"
+                + $"Health: {_health}\n";
         }
         void IChangeable.Change(FieldCollection parameters)
         {

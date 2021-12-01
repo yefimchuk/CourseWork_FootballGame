@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entites\FootballGame.cs" />
     <Compile Include="Entites\FootballPlayer.cs" />
     <Compile Include="Entites\IChangeable.cs" />
     <Compile Include="Entites\IDemonstrated.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Types\Health.cs" />
     <Compile Include="Types\FieldInfo.cs" />
     <Compile Include="Types\MedicalCard.cs" />
+    <Compile Include="Types\ResultGame.cs" />
+    <Compile Include="Types\PlaceGame.cs" />
     <Compile Include="Types\Status.cs" />
     <Compile Include="Types\WorkTime.cs" />
   </ItemGroup>
