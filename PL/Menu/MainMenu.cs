@@ -12,8 +12,8 @@ namespace PL
 
         protected override void SetupBindings(Dictionary<ConsoleKey, Action> binds)
         {
-            binds.Add(ConsoleKey.D1, RunFootballPlayerRegistry);
-            binds.Add(ConsoleKey.D2, RunFootballGameRegistry);
+            binds.Add(ConsoleKey.D1, RunDoctorsRegistry);
+            binds.Add(ConsoleKey.D2, RunPatientRegistry);
             binds.Add(ConsoleKey.D3, RunScheduleManagement);
 
             BindExit(ConsoleKey.Q);
@@ -28,9 +28,9 @@ namespace PL
             view.Add("Q) Exit");
         }
 
-        private void RunFootballPlayerRegistry() => Run<FootballPlayerRegistryMenu>(new DoctorRegistryMenuInitArgs(_registry));
+        private void RunDoctorsRegistry() => Run<FootballPlayerRegistryMenu>(new DoctorRegistryMenuInitArgs(_registry));
 
-        private void RunFootballGameRegistry() => Run<PatientsRegistryMenu>(new PatientRegistryMenuInitArgs(_registry));
+        private void RunPatientRegistry() => Run<PatientsRegistryMenu>(new PatientRegistryMenuInitArgs(_registry));
 
         private void RunScheduleManagement() => Run<ScheduleManagementMenu>();
     }
