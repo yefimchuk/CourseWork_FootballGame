@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace BLL
 {
     [Serializable]
-    public sealed class FootballGame : ISerializable, IInitializable, IChangeable, IDemonstrated
+    public sealed class FootballGame : ISerializable, IInitializable, IChangeable, IDemonstrated, IFieldComparable
     {
         private DateTime _dateOfEvent;
         private PlaceGame _placeGame;
@@ -40,7 +40,7 @@ namespace BLL
             info.AddValue("Place game", _placeGame);
             info.AddValue("Number of spectators", _numberOfspectators);
             info.AddValue("Result game", _resultGame);
-            
+
 
         }
 
