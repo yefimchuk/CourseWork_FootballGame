@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -38,7 +38,7 @@ namespace BLL
             info.AddValue("Number of seats", _numberSeats);
             info.AddValue("Price of seats", _priceSeat);
             info.AddValue("Name Stadium", _nameStadion);
-   
+
 
 
         }
@@ -64,13 +64,12 @@ namespace BLL
             _priceSeat = parameters["Price of seats"];
 
         }
-  
-       public bool IsMatch(FieldCollection fields)
+
+        public bool IsMatch(FieldCollection fields)
         {
             return _nameStadion == fields["Name Stadium"];
-              
+
         }
 
     }
 }
-*/
