@@ -36,10 +36,10 @@ namespace PL
                 string newLine = string.Empty;
 
                 for (int i = 0; i < names.Length; i++)
-                    newLine += $"[{names[i]}: {i}]\n";
-
+                    newLine += $"[{names[i]}: {i}] ";
                 _view.Add(new ViewElement(newLine, _maxPosition));
             }
+
         }
 
         protected override void Draw()

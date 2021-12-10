@@ -7,7 +7,7 @@ namespace PL
         public static void Run<T>(MenuInitArgs initArgs = null) where T : Menu, new()
         {
             T newMenu = new T();
-
+      
             newMenu.Init(initArgs);
             newMenu.RunLoop();
         }

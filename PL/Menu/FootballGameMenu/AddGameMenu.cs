@@ -11,9 +11,9 @@ namespace PL
         {
             base.Init(initArgs);
 
-            if (initArgs is PatientRegistryMenuInitArgs)
+            if (initArgs is GameRegistryMenuInitArgs)
             {
-                var args = (PatientRegistryMenuInitArgs)initArgs;
+                var args = (GameRegistryMenuInitArgs)initArgs;
                 _service = args.service;
             }
         }
@@ -22,8 +22,13 @@ namespace PL
         {
 
             AddView("========== Add ==========");
+            AddEnumView(typeof(Teams)); 
+            AddView("\nSelect the first team: ", true);
+            AddEnumView(typeof(Teams));
+            AddView("\nSelect the second team: ", true);
             AddView("Date of Event: ", true);
-            AddView("Status(0 - Kiyv, 1 - Moscow, 2 - Lisbon, 3 - Athens, 4 - Warshava, 5 - Tokyo  ", true);
+            AddEnumView(typeof(PlaceGame));
+            AddView("\nPlaceGame", true);
             AddView("Number of spectators: ", true);
       
  
@@ -31,11 +36,12 @@ namespace PL
 
         protected override void OnInputFilled(string[] inputs)
         {
-            FieldCollection parameters = new FieldCollection(3);
-
-            parameters.Add("Date of Event", DateTime.Parse(inputs[0]));
-            parameters.Add("Place game", Enum.Parse<PlaceGame>(inputs[1]));
-            parameters.Add("Number of spectators", int.Parse(inputs[2]));      
+            FieldCollection parameters = new FieldCollection(5);
+            parameters.Add("Team 1", Enum.Parse<Teams>(inputs[0]));
+            parameters.Add("Team 2", Enum.Parse<Teams>(inputs[1]));
+            parameters.Add("Date of Event", DateTime.Parse(inputs[2]));
+            parameters.Add("Place game", Enum.Parse<PlaceGame>(inputs[3]));
+            parameters.Add("Number of spectators", int.Parse(inputs[4]));      
             _service.Add<FootballGame>(parameters);
         }
     }

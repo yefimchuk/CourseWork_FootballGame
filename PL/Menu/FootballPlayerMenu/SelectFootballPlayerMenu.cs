@@ -11,9 +11,9 @@ namespace PL
         {
             base.Init(initArgs);
 
-            if (initArgs is DoctorRegistryMenuInitArgs)
+            if (initArgs is FootballPlayerRegistryMenuInitArgs)
             {
-                var args = (DoctorRegistryMenuInitArgs)initArgs;
+                var args = (FootballPlayerRegistryMenuInitArgs)initArgs;
                 _service = args.service;
             }
         }

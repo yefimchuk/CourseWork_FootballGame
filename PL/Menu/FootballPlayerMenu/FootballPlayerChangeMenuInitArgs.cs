@@ -3,7 +3,7 @@
 
 namespace PL
 {
-    class FootballPlayerChangeMenuInitArgs : DoctorRegistryMenuInitArgs
+    class FootballPlayerChangeMenuInitArgs : FootballPlayerRegistryMenuInitArgs
     {
         public readonly FieldCollection fields;
 

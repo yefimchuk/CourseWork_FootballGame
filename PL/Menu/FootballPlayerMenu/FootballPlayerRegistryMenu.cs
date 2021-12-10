@@ -12,9 +12,9 @@ namespace PL
         {
             base.Init(initArgs);
 
-            if (initArgs is DoctorRegistryMenuInitArgs)
+            if (initArgs is FootballPlayerRegistryMenuInitArgs)
             {
-                var args = (DoctorRegistryMenuInitArgs)initArgs;
+                var args = (FootballPlayerRegistryMenuInitArgs)initArgs;
                 _service = args.service;
             }
         }
@@ -39,11 +39,11 @@ namespace PL
             view.Add("Q) Back");
         }
 
-        private void RunAddMenu() => Run<AddFootballPlayer>(new DoctorRegistryMenuInitArgs(_service));
+        private void RunAddMenu() => Run<AddFootballPlayer>(new FootballPlayerRegistryMenuInitArgs(_service));
 
-        private void RunDeleteMenu() => Run<DeleteFootballPlayer>(new DoctorRegistryMenuInitArgs(_service)); //_service.DeleteDoctors();
+        private void RunDeleteMenu() => Run<DeleteFootballPlayer>(new FootballPlayerRegistryMenuInitArgs(_service)); //_service.DeleteDoctors();
 
-        private void RunChangeMenu() => Run<SelectFootballPlayerMenu>(new DoctorRegistryMenuInitArgs(_service));
+        private void RunChangeMenu() => Run<SelectFootballPlayerMenu>(new FootballPlayerRegistryMenuInitArgs(_service));
 
         private void RunShowMenu() => Run<ShowFootballPlayerMenu>(new RegistryMenuInitArgs(_service as Registry));
 

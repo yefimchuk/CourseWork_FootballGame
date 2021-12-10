@@ -11,7 +11,6 @@ namespace DAL
         {
             _formatter = new Formatter();
         }
-
         public void Serialize(string path, object data, bool append = true)
         {
             if (string.IsNullOrEmpty(path) || data == null)

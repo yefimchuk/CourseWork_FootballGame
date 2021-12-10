@@ -79,7 +79,7 @@ namespace BLL
             }
             if (parameters["Surname"] != null)
             {
-                _name = parameters["Surname"];
+                _surname = parameters["Surname"];
             }
             _surname = parameters["Surname"];
             _salary = parameters["Salary"];

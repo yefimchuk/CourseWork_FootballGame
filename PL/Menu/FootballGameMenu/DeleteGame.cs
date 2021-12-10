@@ -3,7 +3,7 @@ using System;
 
 namespace PL
 {
-    class DeleteFootballPlayer : InitializationMenu
+    class DeleteGame : InitializationMenu
     {
         private IService _service;
 
@@ -11,7 +11,7 @@ namespace PL
         {
             base.Init(initArgs);
 
-            var args = initArgs as FootballPlayerRegistryMenuInitArgs;
+            var args = initArgs as GameRegistryMenuInitArgs;
 
             if (args != null)
                 _service = args.service;
@@ -19,19 +19,18 @@ namespace PL
 
         protected override void SetupViewQueue()
         {
-            AddView("========== Delete Doctor ==========");
-            AddView("Name: ", true);
-            AddView("Surname: ", true);
+            AddView("========== Delete Game ==========");
+            AddView("Date of Event: ", true);
         }
 
         protected override void OnInputFilled(string[] parameters)
         {
             FieldCollection initializer = new FieldCollection(1);
 
-            initializer.Add("Name", parameters[0]);
-            initializer.Add("Surname", parameters[1]);
+            initializer.Add("Date of Event", DateTime.Parse(parameters[0])); 
 
-            _service.Delete<FootballPlayer>(initializer);
+
+            _service.Delete<FootballGame>(initializer);
         }
     }
 }

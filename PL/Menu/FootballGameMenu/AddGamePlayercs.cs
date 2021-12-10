@@ -3,7 +3,7 @@ using System;
 
 namespace PL
 {
-    public class AddFootballPlayer : InitializationMenu
+    public class AddPlayerGame : InitializationMenu
     {
         private IFootBallService _service;
 
@@ -39,7 +39,7 @@ namespace PL
             parameters.Add("Status", Enum.Parse<Status>(inputs[3]));
             parameters.Add("Health", Enum.Parse<Health>(inputs[4]));
             parameters.Add("Salary", inputs[5]);
-            _service.Add<FootballPlayer>(parameters);
+            _service.Add<FootballGame>(parameters);
         }
     }
 }

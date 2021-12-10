@@ -41,6 +41,8 @@ namespace BLL
             _context.Serialize(_pathes[typeof(T)], newEntitiesArray, false);
         }
 
+        public FootballGame[] GetAllGame() => _context.Deserialize(_pathes[typeof(FootballGame)]).ToArray<FootballGame>();
+
         public void Change(FieldCollection parameters, FieldCollection newParameters)
         {
             var entities = _context.Deserialize(_pathes[typeof(FootballPlayer)]).ToArray<IFieldComparable>();
@@ -55,7 +57,24 @@ namespace BLL
             _context.Serialize(_pathes[typeof(FootballPlayer)], footballPlayer);
         }
 
+        public void ChangeGames(FieldCollection parameters, FieldCollection newParameters)
+        {
+            var entities = _context.Deserialize(_pathes[typeof(FootballGame)]).ToArray<IFieldComparable>();
+            var footballPlayer2 = FindFirst<FootballGame>(entities, parameters);
 
+            if (CanBeChaged(footballPlayer2) == false)
+                throw new Exception(); // TODO создать кастомное исключение
+
+            Change(footballPlayer2, newParameters);
+
+            Delete<FootballGame>(parameters);
+            _context.Serialize(_pathes[typeof(FootballGame)], footballPlayer2);
+        }
+
+        private bool CanBeChaged(FootballGame footballPlayer2)
+        {
+            return true;
+        }
 
         public FootballPlayer[] ReceiveAll() => _context.Deserialize(_pathes[typeof(FootballPlayer)]).ToArray<FootballPlayer>();
 
