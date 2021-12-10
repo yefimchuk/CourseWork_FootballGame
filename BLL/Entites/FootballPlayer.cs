@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -6,10 +6,10 @@ using System.Runtime.Serialization;
 namespace BLL
 {
     [Serializable]
-  
-    public sealed class FootballPlayer: ISerializable, IInitializable, IChangeable, IDemonstrated, IFieldComparable
+
+    public sealed class FootballPlayer : ISerializable, IInitializable, IChangeable, IDemonstrated, IFieldComparable
     {
-        public string _name { get; set;}
+        public string _name { get; set; }
         public string _surname { get; set; }
         public DateTime _born { get; set; }
         public Status _status { get; set; }
@@ -19,7 +19,7 @@ namespace BLL
 
         public FootballPlayer() { }
 
-        public FootballPlayer(string name, string surname, DateTime born, Status status, Health health, string salary) 
+        public FootballPlayer(string name, string surname, DateTime born, Status status, Health health, string salary)
         {
             _name = name;
             _surname = surname;
@@ -35,7 +35,7 @@ namespace BLL
             _surname = info.GetString("Surname");
             _born = (DateTime)info.GetValue("Born", typeof(DateTime));
             _status = (Status)info.GetValue("Status", typeof(Status));
-            _health = (Health) info.GetValue("Health", typeof(Health));
+            _health = (Health)info.GetValue("Health", typeof(Health));
             _salary = info.GetString("Salary");
         }
 
@@ -67,8 +67,8 @@ namespace BLL
         {
             return $"Name: {_name}\n"
                 + $"Surname: {_surname}\n"
-                +$"Salary: {_salary}\n"
-                +$"Status: {_status}\n"
+                + $"Salary: {_salary}\n"
+                + $"Status: {_status}\n"
                 + $"Born: {_born}\n"
                 + $"Health: {_health}\n";
         }
@@ -81,7 +81,7 @@ namespace BLL
             return false;
         }
         public void Change(FieldCollection parameters)
-     
+
         {
             if (parameters["Name"] != null)
             {
@@ -96,7 +96,7 @@ namespace BLL
             _status = parameters["Status"];
             _health = parameters["Health"];
             _born = parameters["Born"];
-                                                            
+
         }
         public bool IsMatch(FieldCollection fields)
         {
@@ -105,4 +105,3 @@ namespace BLL
         }
     }
 }
-*/
