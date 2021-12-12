@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace BLL
 {
 
-    public enum ResultGame
+    public enum StadiumName
     {
-        
+        Emirates, Wembley, Olympic, Luzhniki
     }
 }

@@ -43,11 +43,13 @@
   <ItemGroup>
     <Compile Include="Entites\FootballGame.cs" />
     <Compile Include="Entites\FootballPlayer.cs" />
+    <Compile Include="Entites\FootballStadium.cs" />
     <Compile Include="Entites\IChangeable.cs" />
     <Compile Include="Entites\IDemonstrated.cs" />
     <Compile Include="Entites\IFieldComparable.cs" />
     <Compile Include="Entites\IInitializable.cs" />
     <Compile Include="Extention\ArrayExtension.cs" />
+    <Compile Include="Services\Interfaces\IStadiumService.cs" />
     <Compile Include="Services\MainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IFootBallService.cs" />
@@ -59,8 +61,8 @@
     <Compile Include="Types\Health.cs" />
     <Compile Include="Types\FieldInfo.cs" />
     <Compile Include="Types\MedicalCard.cs" />
-    <Compile Include="Types\ResultGame.cs" />
     <Compile Include="Types\PlaceGame.cs" />
+    <Compile Include="Types\StadiumName.cs" />
     <Compile Include="Types\Status.cs" />
     <Compile Include="Types\Teams.cs" />
     <Compile Include="Types\WorkTime.cs" />

@@ -37,6 +37,7 @@ namespace PL
         protected override void OnInputFilled(string[] inputs)
         {
             FieldCollection parameters = new FieldCollection(5);
+
             parameters.Add("Team 1", Enum.Parse<Teams>(inputs[0]));
             parameters.Add("Team 2", Enum.Parse<Teams>(inputs[1]));
             parameters.Add("Date of Event", DateTime.Parse(inputs[2]));

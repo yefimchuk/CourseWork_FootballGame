@@ -4,7 +4,7 @@ using DAL;
 
 namespace BLL
 {
-    public class Registry : IFootBallService, IGameService
+    public class Registry : IFootBallService, IGameService, IStadiumService
     {
         private DataContext _context;
 
@@ -18,6 +18,7 @@ namespace BLL
             _pathes = new Dictionary<Type, string>();
             _pathes.Add(typeof(FootballPlayer), "footballPlayer.txt");
             _pathes.Add(typeof(FootballGame), "footballGame.txt");
+            _pathes.Add(typeof(FootballStadium), "footballStadium.txt");
         }
 
         public void Add<T>(FieldCollection parameters) where T : IInitializable
@@ -42,6 +43,7 @@ namespace BLL
         }
 
         public FootballGame[] GetAllGame() => _context.Deserialize(_pathes[typeof(FootballGame)]).ToArray<FootballGame>();
+        public FootballStadium[] GetAllStadium() => _context.Deserialize(_pathes[typeof(FootballStadium)]).ToArray<FootballStadium>();
 
         public void Change(FieldCollection parameters, FieldCollection newParameters)
         {
@@ -69,6 +71,24 @@ namespace BLL
 
             Delete<FootballGame>(parameters);
             _context.Serialize(_pathes[typeof(FootballGame)], footballPlayer2);
+        }
+        public void ChangeStadium(FieldCollection parameters, FieldCollection newParameters)
+        {
+            var entities = _context.Deserialize(_pathes[typeof(FootballStadium)]).ToArray<IFieldComparable>();
+            var footballPlayer3 = FindFirst<FootballStadium>(entities, parameters);
+
+            if (CanBeChaged(footballPlayer3) == false)
+                throw new Exception(); // TODO создать кастомное исключение
+
+            Change(footballPlayer3, newParameters);
+
+            Delete<FootballStadium>(parameters);
+            _context.Serialize(_pathes[typeof(FootballStadium)], footballPlayer3);
+        }
+
+        private bool CanBeChaged(FootballStadium footballPlayer3)
+        {
+            return true;
         }
 
         private bool CanBeChaged(FootballGame footballPlayer2)

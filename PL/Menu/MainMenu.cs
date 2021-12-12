@@ -14,7 +14,7 @@ namespace PL
         {
             binds.Add(ConsoleKey.D1, RunFootballPlayerRegistry);
             binds.Add(ConsoleKey.D2, RunFootballGameRegistry);
-            binds.Add(ConsoleKey.D3, RunScheduleManagement);
+            binds.Add(ConsoleKey.D3, RunFootballStadiumRegistry);
 
             BindExit(ConsoleKey.Q);
         }
@@ -32,6 +32,7 @@ namespace PL
 
         private void RunFootballGameRegistry() => Run<GameRegistryMenu>(new GameRegistryMenuInitArgs(_registry));
 
-        private void RunScheduleManagement() => Run<ScheduleManagementMenu>();
+        private void RunFootballStadiumRegistry() => Run<StadiumRegistryMenu>(new StadiumRegistryMenuInitArgs(_registry));
+
     }
 }
