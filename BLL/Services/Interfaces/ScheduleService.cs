@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PL
+namespace BLL.Services.Interfaces
 {
-    class StadiumDeteleMenu
+    class ScheduleService
     {
     }
 }

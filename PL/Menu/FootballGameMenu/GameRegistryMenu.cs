@@ -4,20 +4,9 @@ using System.Collections.Generic;
 
 namespace PL
 {
-    class GameRegistryMenu : StaticMenu
+    public class GameRegistryMenu : StaticMenu
     {
-        private IGameService _service;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            if (initArgs is GameRegistryMenuInitArgs)
-            {
-                var args = (GameRegistryMenuInitArgs)initArgs;
-                _service = args.service;
-            }
-        }
+       
 
         protected override void SetupBindings(Dictionary<ConsoleKey, Action> binds)
         {
@@ -41,11 +30,11 @@ namespace PL
             view.Add("Q) Back");
         }
 
-        private void RunAddMenu() => Run<AddGamenMenu>(new GameRegistryMenuInitArgs(_service));
-        private void RunDeleteMenu() => Run<DeleteGame>(new GameRegistryMenuInitArgs(_service));
-        private void RunChangeMenu() => Run<SelectGameMenu>(new GameRegistryMenuInitArgs(_service));
-        private void RunShowMenu() => Run<ShowGameMenu>(new RegistryMenuInitArgs(_service as Registry));
-        private void RunSortMenu() => Run<SortByDateGame>(new GameRegistryMenuInitArgs(_service));
+        private void RunAddMenu() => Run<AddGamenMenu>();
+        private void RunDeleteMenu() => Run<DeleteGame>();
+        private void RunChangeMenu() => Run<SelectGameMenu>();
+        private void RunShowMenu() => Run<ShowGameMenu>();
+        private void RunSortMenu() => Run<Sort>();
     }
 
 }

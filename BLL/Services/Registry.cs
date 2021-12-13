@@ -1,139 +1,95 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
-using DAL;
+using System.Linq;
 
 namespace BLL
 {
-    public class Registry : IFootBallService, IGameService, IStadiumService
+    public sealed class Registry
     {
-        private DataContext _context;
+        private static readonly DataContext _context;
+        private static readonly Dictionary<Type, string> _pathes;
+        private static ISet<IServiceComponent> _services;
 
-        // temp pathes
-        private Dictionary<Type, string> _pathes;
-
-        public Registry()
+        static Registry()
         {
             _context = new DataContext();
 
-            _pathes = new Dictionary<Type, string>();
-            _pathes.Add(typeof(FootballPlayer), "footballPlayer.txt");
-            _pathes.Add(typeof(FootballGame), "footballGame.txt");
-            _pathes.Add(typeof(FootballStadium), "footballStadium.txt");
+            _services = new HashSet<IServiceComponent>(3)
+            {
+                new PlayerSevice(),
+                new GameService(),
+                new StadiumService()
+            };
+
+            _pathes = new Dictionary<Type, string>(3)
+            {
+                { typeof(FootballPlayer), "footballPlayer.txt" },
+                { typeof(FootballGame), "footballGame.txt" },
+                { typeof(FootballStadium), "footballStadium.txt" }
+            };
         }
 
-        public void Add<T>(FieldCollection parameters) where T : IInitializable
+        public static T GetService<T>() where T : class, IServiceComponent
+        {
+            foreach (var service in _services)
+                if (service is T res)
+                    return res;
+
+            throw new Exception($"Service with {typeof(T).Name} is not exist...");
+        }
+
+        public static void Add<T>(FieldCollection parameters) where T : IInitializable
         {
             var newEntity = Activator.CreateInstance(typeof(T)) as IInitializable;
 
             if (newEntity != null)
             {
                 newEntity.Initialize(parameters);
-                _context.Serialize(_pathes[typeof(T)], newEntity);
+                Save<T>(newEntity);
             }
         }
 
-        public FootballPlayer[] GetAllDoctors() => _context.Deserialize(_pathes[typeof(FootballPlayer)]).ToArray<FootballPlayer>();
-
-        public void Delete<T>(FieldCollection parameters) where T : IFieldComparable
+        public static void Delete<T>(FieldCollection parameters) where T : IFieldComparable
         {
-            var entities = _context.Deserialize(_pathes[typeof(T)]).ToArray<IFieldComparable>();
-            var newEntitiesArray = Delete(entities, parameters);
+            var entities = _context.Deserialize(_pathes[typeof(T)]).To<IFieldComparable>();
+            var newEntitiesArray = entities.Delete(parameters);
 
             _context.Serialize(_pathes[typeof(T)], newEntitiesArray, false);
         }
 
-        public FootballGame[] GetAllGame() => _context.Deserialize(_pathes[typeof(FootballGame)]).ToArray<FootballGame>();
-        public FootballStadium[] GetAllStadium() => _context.Deserialize(_pathes[typeof(FootballStadium)]).ToArray<FootballStadium>();
-
-        public void Change(FieldCollection parameters, FieldCollection newParameters)
+        public static T[] Find<T>(FieldCollection parameters) where T : IFieldComparable
         {
-            var entities = _context.Deserialize(_pathes[typeof(FootballPlayer)]).ToArray<IFieldComparable>();
-            var footballPlayer = FindFirst<FootballPlayer>(entities, parameters);
-
-            if (CanBeChaged(footballPlayer) == false)
-                throw new Exception(); // TODO создать кастомное исключение
-
-            Change(footballPlayer, newParameters);
-
-            Delete<FootballPlayer>(parameters);
-            _context.Serialize(_pathes[typeof(FootballPlayer)], footballPlayer);
+            var loaded = Load<T>();
+            return loaded.Where(obj => obj.IsMatch(parameters))
+                .ToArray();
         }
 
-        public void ChangeGames(FieldCollection parameters, FieldCollection newParameters)
+        public static void Save<T>(object data, bool append = true)
         {
-            var entities = _context.Deserialize(_pathes[typeof(FootballGame)]).ToArray<IFieldComparable>();
-            var footballPlayer2 = FindFirst<FootballGame>(entities, parameters);
-
-            if (CanBeChaged(footballPlayer2) == false)
-                throw new Exception(); // TODO создать кастомное исключение
-
-            Change(footballPlayer2, newParameters);
-
-            Delete<FootballGame>(parameters);
-            _context.Serialize(_pathes[typeof(FootballGame)], footballPlayer2);
-        }
-        public void ChangeStadium(FieldCollection parameters, FieldCollection newParameters)
-        {
-            var entities = _context.Deserialize(_pathes[typeof(FootballStadium)]).ToArray<IFieldComparable>();
-            var footballPlayer3 = FindFirst<FootballStadium>(entities, parameters);
-
-            if (CanBeChaged(footballPlayer3) == false)
-                throw new Exception(); // TODO создать кастомное исключение
-
-            Change(footballPlayer3, newParameters);
-
-            Delete<FootballStadium>(parameters);
-            _context.Serialize(_pathes[typeof(FootballStadium)], footballPlayer3);
+            string path = GetPath<T>();
+            _context.Serialize(path, data, append);
         }
 
-        private bool CanBeChaged(FootballStadium footballPlayer3)
+        public static T[] Load<T>()
         {
-            return true;
+            string path = GetPath<T>();
+            return _context.Deserialize(path).To<T>();
         }
 
-        private bool CanBeChaged(FootballGame footballPlayer2)
+        public static string GetPath<T>()
         {
-            return true;
+            Type type = typeof(T);
+
+            if (_pathes.ContainsKey(type))
+                return _pathes[type];
+
+            throw new Exception($"Path for {type.Name} is not exist...");
         }
 
-        public FootballPlayer[] ReceiveAll() => _context.Deserialize(_pathes[typeof(FootballPlayer)]).ToArray<FootballPlayer>();
-
-        private object[] Delete(IFieldComparable[] from, FieldCollection parameters)
+        public static void DeleteAllAppointments()
         {
-            List<object> newEntities = new List<object>();
-
-            foreach (var entity in from)
-                if (entity.IsMatch(parameters) == false)
-                    newEntities.Add(entity);
-
-            return newEntities.ToArray();
-        }
-
-        public void DeleteDoctors()
-        {
-            throw new NotImplementedException();
-        }
-
-        private T FindFirst<T>(IFieldComparable[] from, FieldCollection parameters) where T : IFieldComparable
-        { 
-            foreach (var entity in from)
-                if (entity.IsMatch(parameters))
-                    return (T)entity;
-
-            return default;
-        }
-
-        private void Change(in IChangeable initializable, FieldCollection parameters)
-        {
-            initializable.Change(parameters);
-        }
-
-        private bool CanBeChaged(FootballPlayer footballPlayer)
-        {
-            // TODO проверить нет ли записае, если есть то данные нельзя поменять 
-            //throw new NotImplementedException();
-
-            return true;
+            _context.Serialize(_pathes[typeof(Appointment)], new Appointment[] { }, false);
         }
     }
 }

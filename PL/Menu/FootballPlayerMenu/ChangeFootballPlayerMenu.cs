@@ -6,19 +6,14 @@ namespace PL
 {
     class ChangeFootballPlayerMenu : InitializationMenu
     {
-        private IFootBallService _service;
-        private FieldCollection _fields;
+        private FieldCollection _lastFields;
 
         protected override void Init(MenuInitArgs initArgs)
         {
             base.Init(initArgs);
 
-            if (initArgs is FootballPlayerChangeMenuInitArgs)
-            {
-                var args = (FootballPlayerChangeMenuInitArgs)initArgs;
-                _service = args.service;
-                _fields = args.fields;
-            }
+            if (initArgs is InputParametersInitArgs args)
+                _lastFields = args.fields[0];
         }
 
         protected override void SetupViewQueue()
@@ -44,7 +39,7 @@ namespace PL
             fieldCollection.Add("Salary", inputs[3]);
             fieldCollection.Add("Health", Enum.Parse<Health>(inputs[4]));
             fieldCollection.Add("Born", DateTime.Parse(inputs[5]));
-            _service.Change(_fields, fieldCollection);
+            Registry.GetService<PlayerSevice>().Change(_lastFields, fieldCollection);
         }
     }
 }

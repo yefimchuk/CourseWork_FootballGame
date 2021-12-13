@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 
 namespace PL
@@ -10,10 +11,15 @@ namespace PL
         private List<string> _inputs = new List<string>();
         private List<ViewElement> _view = new List<ViewElement>();
 
-        protected abstract void SetupViewQueue();
-        protected abstract void OnInputFilled(string[] parameters);
+        protected FieldCollection _processedInputs = new FieldCollection(2);
 
-        protected override void Init(MenuInitArgs initArgs) => SetupViewQueue();
+        protected abstract void SetupViewQueue();
+        protected abstract void OnInputFilled(string[] inputs);
+
+        protected override void Init(MenuInitArgs initArgs)
+        {
+            SetupViewQueue();
+        }
 
         protected void AddView(string line, bool handleInputAfter = false)
         {
@@ -24,22 +30,31 @@ namespace PL
 
             _view.Add(new ViewElement(
                 line,
-                handleInputAfter == true 
-                ? _maxPosition - 1 
+                handleInputAfter == true
+                ? _maxPosition - 1
                 : _maxPosition));
         }
-        protected void AddEnumView(Type type)
+
+        protected void AddEnumView(Type type, bool autoIncreaseNumber = false)
         {
             if (type.IsEnum)
             {
                 string[] names = Enum.GetNames(type);
                 string newLine = string.Empty;
+                int number;
 
                 for (int i = 0; i < names.Length; i++)
-                    newLine += $"[{names[i]}: {i}] ";
+                {
+                    number = i;
+
+                    if (autoIncreaseNumber)
+                        number++;
+
+                    newLine += $"[{names[i]}: {number}]\n";
+                }
+
                 _view.Add(new ViewElement(newLine, _maxPosition));
             }
-
         }
 
         protected override void Draw()
@@ -61,8 +76,14 @@ namespace PL
             }
 
             OnInputFilled(_inputs.ToArray());
+            PostInputHandle();
         }
 
-        private void HandleInput() => _inputs.Add(Console.ReadLine());
+        protected virtual void PostInputHandle() { }
+
+        private void HandleInput()
+        {
+            _inputs.Add(Console.ReadLine());
+        }
     }
 }

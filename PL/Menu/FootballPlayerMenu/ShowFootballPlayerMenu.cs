@@ -4,16 +4,9 @@ namespace PL
 {
     public class ShowFootballPlayerMenu : ShowMenu
     {
-        private Registry _service;
-
-        protected override void Init(MenuInitArgs initArgs)
+        protected override void InitDemonstrationObjects(ref IDemonstrated[] objects)
         {
-            var args = initArgs as RegistryMenuInitArgs;
-
-            if (args != null)
-                _service = args.service;
+            objects = Registry.Load<FootballPlayer>();
         }
-
-        protected override void InitDemonstrationObjects(ref IDemonstrated[] objects) => objects = _service.GetAllDoctors();
     }
 }

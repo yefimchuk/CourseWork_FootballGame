@@ -5,18 +5,7 @@ namespace PL
 {
     public class AddFootballPlayer : InitializationMenu
     {
-        private IFootBallService _service;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            if (initArgs is FootballPlayerRegistryMenuInitArgs)
-            {
-                var args = (FootballPlayerRegistryMenuInitArgs)initArgs;
-                _service = args.service;
-            }
-        }
+      
 
         protected override void SetupViewQueue()
         {
@@ -39,7 +28,7 @@ namespace PL
             parameters.Add("Status", Enum.Parse<Status>(inputs[3]));
             parameters.Add("Health", Enum.Parse<Health>(inputs[4]));
             parameters.Add("Salary", inputs[5]);
-            _service.Add<FootballPlayer>(parameters);
+            Registry.Add<FootballPlayer>(parameters);
         }
     }
 }

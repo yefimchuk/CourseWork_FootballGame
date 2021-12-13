@@ -5,17 +5,7 @@ namespace PL
 {
     class DeleteFootballPlayer : InitializationMenu
     {
-        private IService _service;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            var args = initArgs as FootballPlayerRegistryMenuInitArgs;
-
-            if (args != null)
-                _service = args.service;
-        }
+      
 
         protected override void SetupViewQueue()
         {
@@ -31,7 +21,7 @@ namespace PL
             initializer.Add("Name", parameters[0]);
             initializer.Add("Surname", parameters[1]);
 
-            _service.Delete<FootballPlayer>(initializer);
+            Registry.Delete<FootballPlayer>(initializer);
         }
     }
 }

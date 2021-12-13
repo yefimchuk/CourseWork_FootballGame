@@ -5,18 +5,7 @@ namespace PL
 {
     class DeleteGame : InitializationMenu
     {
-        private IService _service;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            var args = initArgs as GameRegistryMenuInitArgs;
-
-            if (args != null)
-                _service = args.service;
-        }
-
+       
         protected override void SetupViewQueue()
         {
             AddView("========== Delete Game ==========");
@@ -30,7 +19,7 @@ namespace PL
             initializer.Add("Date of Event", DateTime.Parse(parameters[0])); 
 
 
-            _service.Delete<FootballGame>(initializer);
+            Registry.Delete<FootballGame>(initializer);
         }
     }
 }

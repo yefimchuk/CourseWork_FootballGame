@@ -6,18 +6,7 @@ namespace PL
 {
     class StadiumRegistryMenu : StaticMenu
     {
-        private IStadiumService _service;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            if (initArgs is StadiumRegistryMenuInitArgs)
-            {
-                var args = (StadiumRegistryMenuInitArgs)initArgs;
-                _service = args.service;
-            }
-        }
+      
 
         protected override void SetupBindings(Dictionary<ConsoleKey, Action> binds)
         {
@@ -39,10 +28,10 @@ namespace PL
             view.Add("Q) Back");
         }
 
-        private void RunAddStadiumMenu() => Run<AddStadiumMenu>(new StadiumRegistryMenuInitArgs(_service));
-        private void RunDeleteStadiumMenu() => Run<DeleteStadium>(new StadiumRegistryMenuInitArgs(_service));
-        private void RunChangeStadiumMenu() => Run<SelectStadiumMenu>(new StadiumRegistryMenuInitArgs(_service));
-        private void RunShowStadiumMenu() => Run<ShowStadiumMenu>(new RegistryMenuInitArgs(_service as Registry));
+        private void RunAddStadiumMenu() => Run<AddStadiumMenu>();
+        private void RunDeleteStadiumMenu() => Run<DeleteStadium>();
+        private void RunChangeStadiumMenu() => Run<SelectStadiumMenu>();
+        private void RunShowStadiumMenu() => Run<ShowStadiumMenu>();
     }
 
 }

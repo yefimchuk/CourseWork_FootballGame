@@ -5,21 +5,12 @@ namespace PL
 {
     class DeleteStadium : InitializationMenu
     {
-        private IService _service;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            var args = initArgs as StadiumRegistryMenuInitArgs;
-
-            if (args != null)
-                _service = args.service;
-        }
+       
 
         protected override void SetupViewQueue()
         {
             AddView("========== Delete Game ==========");
+            AddEnumView(typeof(StadiumName));
             AddView("Name Stadium: ", true);
         }
 
@@ -29,7 +20,7 @@ namespace PL
 
             initializer.Add("Name Stadium", parameters[0].ToString());
 
-            _service.Delete<FootballStadium>(initializer);
+            Registry.Delete<FootballStadium>(initializer);
         }
     }
 }

@@ -6,19 +6,7 @@ namespace PL
 {
     public class FootballPlayerRegistryMenu : StaticMenu
     {
-        private IFootBallService _service;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            if (initArgs is FootballPlayerRegistryMenuInitArgs)
-            {
-                var args = (FootballPlayerRegistryMenuInitArgs)initArgs;
-                _service = args.service;
-            }
-        }
-
+       
         protected override void SetupBindings(Dictionary<ConsoleKey, Action> binds)
         {
             binds.Add(ConsoleKey.D1, RunAddMenu);
@@ -39,13 +27,13 @@ namespace PL
             view.Add("Q) Back");
         }
 
-        private void RunAddMenu() => Run<AddFootballPlayer>(new FootballPlayerRegistryMenuInitArgs(_service));
+        private void RunAddMenu() => Run<AddFootballPlayer>();
 
-        private void RunDeleteMenu() => Run<DeleteFootballPlayer>(new FootballPlayerRegistryMenuInitArgs(_service)); //_service.DeleteDoctors();
+        private void RunDeleteMenu() => Run<DeleteFootballPlayer>();
 
-        private void RunChangeMenu() => Run<SelectFootballPlayerMenu>(new FootballPlayerRegistryMenuInitArgs(_service));
+        private void RunChangeMenu() => Run<SelectFootballPlayerMenu>();
 
-        private void RunShowMenu() => Run<ShowFootballPlayerMenu>(new RegistryMenuInitArgs(_service as Registry));
+        private void RunShowMenu() => Run<ShowFootballPlayerMenu>();
 
     }
 }

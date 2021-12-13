@@ -6,19 +6,14 @@ namespace PL
 {
     class ChangeStadiumMenu : InitializationMenu
     {
-        private IStadiumService _service;
-        private FieldCollection _fields;
+        private FieldCollection _lastFields;
 
         protected override void Init(MenuInitArgs initArgs)
         {
             base.Init(initArgs);
 
-            if (initArgs is StadiumChangeMenuInitArgs)
-            {
-                var args = (StadiumChangeMenuInitArgs)initArgs;
-                _service = args.service;
-                _fields = args.fields;
-            }
+            if (initArgs is InputParametersInitArgs args)
+                _lastFields = args.fields[0];
         }
 
         protected override void SetupViewQueue()
@@ -38,8 +33,7 @@ namespace PL
             fieldCollection.Add("Number of seats", int.Parse(inputs[0]));
             fieldCollection.Add("Price of seats", int.Parse(inputs[1]));
 
-
-            _service.ChangeStadium(_fields, fieldCollection);
+            Registry.GetService<StadiumService>().Change(_lastFields, fieldCollection);
         }
     }
 }

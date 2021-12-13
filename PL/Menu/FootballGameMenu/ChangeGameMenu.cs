@@ -7,20 +7,7 @@ namespace PL
 {
     class GameChangeMenu : StaticMenu
     {
-        private IGameService _service;
-        private FieldCollection _fields;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            if (initArgs is GameChangeMenuInitArgs)
-            {
-                var args = (GameChangeMenuInitArgs)initArgs;
-                _service = args.service;
-                _fields = args.fields;
-            }
-        }
+     
 
         protected override void SetupBindings(Dictionary<ConsoleKey, Action> binds)
         {
@@ -39,13 +26,19 @@ namespace PL
             view.Add("3) Change data of event, number speacers and place of game");
             view.Add("Q) Exit");
         }
+        private FieldCollection _processedInputs;
+        protected override void Init(MenuInitArgs initArgs)
+        {
+            base.Init(initArgs);
+            if (initArgs is InputParametersInitArgs args)
+                _processedInputs = args.fields[0];
+        }
 
+        private void RunAddPlayer() => Run<AddPlayerGame>();
 
-        private void RunAddPlayer() => Run<AddPlayerGame>(new GameRegistryMenuInitArgs(_service));
+        private void RunDeletePlayer() => Run<GameRegistryMenu>();
 
-        private void RunDeletePlayer() => Run<GameRegistryMenu>(new GameRegistryMenuInitArgs(_service));
-
-        private void RunChangeOther() => Run<ChangeGame>(new GameChangeMenuInitArgs(_service, _fields));
+        private void RunChangeOther() => Run<ChangeGame>(new InputParametersInitArgs(_processedInputs));
 
     }
 }

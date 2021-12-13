@@ -6,19 +6,14 @@ namespace PL
 {
     class ChangeGame : InitializationMenu
     {
-        private IGameService _service;
-        private FieldCollection _fields;
+        private FieldCollection _lastFields;
 
         protected override void Init(MenuInitArgs initArgs)
         {
             base.Init(initArgs);
 
-            if (initArgs is GameChangeMenuInitArgs)
-            {
-                var args = (GameChangeMenuInitArgs)initArgs;
-                _service = args.service;
-                _fields = args.fields;
-            }
+            if (initArgs is InputParametersInitArgs args)
+                _lastFields = args.fields[0];
         }
 
         protected override void SetupViewQueue()
@@ -38,7 +33,7 @@ namespace PL
             fieldCollection.Add("Place game", Enum.Parse<PlaceGame>(inputs[0]));
             fieldCollection.Add("Date of Event", DateTime.Parse(inputs[1]));
             fieldCollection.Add("Number of spectators", int.Parse(inputs[2]));
-            _service.ChangeGames(_fields, fieldCollection);
+            Registry.GetService<GameService>().Change(_lastFields, fieldCollection);
         }
     }
 }

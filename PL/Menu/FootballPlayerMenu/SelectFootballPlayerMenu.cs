@@ -5,18 +5,7 @@ namespace PL
 {
     class SelectFootballPlayerMenu : InitializationMenu
     {
-        private IFootBallService _service;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            if (initArgs is FootballPlayerRegistryMenuInitArgs)
-            {
-                var args = (FootballPlayerRegistryMenuInitArgs)initArgs;
-                _service = args.service;
-            }
-        }
+       
 
         protected override void SetupViewQueue()
         {
@@ -32,7 +21,7 @@ namespace PL
             fieldCollection.Add("Name", inputs[0]);
             fieldCollection.Add("Surname", inputs[1]);
 
-            Run<ChangeFootballPlayerMenu>(new FootballPlayerChangeMenuInitArgs(_service, fieldCollection));
+            Run<ChangeFootballPlayerMenu>(new InputParametersInitArgs(fieldCollection));
         }
     }
 }

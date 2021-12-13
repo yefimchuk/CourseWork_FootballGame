@@ -5,18 +5,7 @@ namespace PL
 {
     public class AddStadiumMenu : InitializationMenu
     {
-        private IStadiumService _service;
-
-        protected override void Init(MenuInitArgs initArgs)
-        {
-            base.Init(initArgs);
-
-            if (initArgs is StadiumRegistryMenuInitArgs)
-            {
-                var args = (StadiumRegistryMenuInitArgs)initArgs;
-                _service = args.service;
-            }
-        }
+       
 
         protected override void SetupViewQueue()
         {
@@ -39,7 +28,7 @@ namespace PL
             parameters.Add("Name Stadium", Enum.Parse<StadiumName>(inputs[0]));
             parameters.Add("Price of seats", int.Parse(inputs[1]));
             parameters.Add("Number of seats", int.Parse(inputs[2]));
-            _service.Add<FootballStadium>(parameters);
+            Registry.Add<FootballStadium>(parameters);
         }
     }
 }
