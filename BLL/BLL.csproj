@@ -66,12 +66,10 @@
     <Compile Include="Types\FieldCollection.cs" />
     <Compile Include="Types\Health.cs" />
     <Compile Include="Types\FieldInfo.cs" />
-    <Compile Include="Types\MedicalCard.cs" />
     <Compile Include="Types\PlaceGame.cs" />
     <Compile Include="Types\StadiumName.cs" />
     <Compile Include="Types\Status.cs" />
     <Compile Include="Types\Teams.cs" />
-    <Compile Include="Types\WorkTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

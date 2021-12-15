@@ -1,11 +1,12 @@
-﻿
+﻿using BLL;
+using System;
 namespace PL
 {
     class GameFindMenu : InitializationMenu
     {
         protected override void SetupViewQueue()
         {
-            AddView("========== Doctor Find ==========");
+            AddView("========== Game Find ==========");
             AddView("Date of event: ", true);
 
             AddView("Select team 2 : ", true);
@@ -14,8 +15,8 @@ namespace PL
 
         protected override void OnInputFilled(string[] inputs)
         {
-            _processedInputs.Add("Date of Event", inputs[0]);
-            _processedInputs.Add("Team Two", inputs[1]);
+            _processedInputs.Add("Date of Event", System.DateTime.Parse(inputs[0]));
+            _processedInputs.Add("Team Two", Enum.Parse<Teams>(inputs[1]));
 
         }
 

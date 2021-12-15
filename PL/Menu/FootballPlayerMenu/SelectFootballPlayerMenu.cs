@@ -9,7 +9,7 @@ namespace PL
 
         protected override void SetupViewQueue()
         {
-            AddView("========== Select Doctor ==========");
+            AddView("========== Select Stadium ==========");
             AddView("Name: ", true);
             AddView("Surname: ", true);
         }

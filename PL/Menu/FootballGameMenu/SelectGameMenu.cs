@@ -18,7 +18,7 @@ namespace PL
         {
 
 
-            _processedInputs.Add("Date of Event", inputs[0]);
+            _processedInputs.Add("Date of Event", System.DateTime.Parse(inputs[0]));
 
 
         }

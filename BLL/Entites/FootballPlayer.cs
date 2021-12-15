@@ -1,19 +1,21 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace BLL
 {
     [Serializable]
+  
     public sealed class FootballPlayer: ISerializable, IInitializable, IChangeable, IDemonstrated, IFieldComparable
     {
-        private string _name;
-        private string _surname;
-        private DateTime _born;
-        private  Status _status;
-        private Health _health;
-        private string _salary;
-   
+        public string _name { get; set;}
+        public string _surname { get; set; }
+        public DateTime _born { get; set; }
+        public Status _status { get; set; }
+        public Health _health { get; set; }
+        public string _salary { get; set; }
+
 
         public FootballPlayer() { }
 
@@ -35,7 +37,6 @@ namespace BLL
             _status = (Status)info.GetValue("Status", typeof(Status));
             _health = (Health) info.GetValue("Health", typeof(Health));
             _salary = info.GetString("Salary");
-
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -71,7 +72,16 @@ namespace BLL
                 + $"Born: {_born}\n"
                 + $"Health: {_health}\n";
         }
-        void IChangeable.Change(FieldCollection parameters)
+        public override bool Equals(object obj)
+        {
+            if (obj is FootballPlayer footballPlayer)
+            {
+                return this._name == footballPlayer._name && this._surname == footballPlayer._surname && this._salary == footballPlayer._salary;
+            }
+            return false;
+        }
+        public void Change(FieldCollection parameters)
+     
         {
             if (parameters["Name"] != null)
             {
@@ -86,9 +96,9 @@ namespace BLL
             _status = parameters["Status"];
             _health = parameters["Health"];
             _born = parameters["Born"];
-
+                                                            
         }
-        bool IFieldComparable.IsMatch(FieldCollection fields)
+        public bool IsMatch(FieldCollection fields)
         {
             return _name == fields["Name"]
                 && _surname == fields["Surname"];

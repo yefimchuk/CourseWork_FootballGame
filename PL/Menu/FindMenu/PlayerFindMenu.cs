@@ -5,7 +5,7 @@ namespace PL
     {
         protected override void SetupViewQueue()
         {
-            AddView("========== Doctor Find ==========");
+            AddView("========== Game Find ==========");
             AddView("Name: ", true);
             AddView("Surname: ", true);
         }

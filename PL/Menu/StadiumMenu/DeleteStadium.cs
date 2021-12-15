@@ -18,7 +18,7 @@ namespace PL
         {
             FieldCollection initializer = new FieldCollection(1);
 
-            initializer.Add("Name Stadium", parameters[0].ToString());
+            initializer.Add("Name Stadium", Enum.Parse<StadiumName>(parameters[0]));
 
             Registry.Delete<FootballStadium>(initializer);
         }

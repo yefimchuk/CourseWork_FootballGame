@@ -26,7 +26,7 @@ namespace PL
             view.Add("2) Delete game");
             view.Add("3) Change data of game");
             view.Add("4) Show All games");
-            view.Add("4) Show sort games");
+            view.Add("5) Show sort games");
             view.Add("Q) Back");
         }
 

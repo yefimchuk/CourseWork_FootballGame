@@ -34,9 +34,9 @@ namespace PL
                 _processedInputs = args.fields[0];
         }
 
-        private void RunAddPlayer() => Run<AddPlayerGame>();
+        private void RunAddPlayer() => Run<AddPlayerGame>(new InputParametersInitArgs(_processedInputs));
 
-        private void RunDeletePlayer() => Run<GameRegistryMenu>();
+        private void RunDeletePlayer() => Run<DeleteGamePlayer>(new InputParametersInitArgs(_processedInputs));
 
         private void RunChangeOther() => Run<ChangeGame>(new InputParametersInitArgs(_processedInputs));
 

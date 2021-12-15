@@ -30,7 +30,7 @@ namespace PL
 
         private void RunFootballGameRegistry() => Run<SortByWin>();
 
-        private void RunFootballStadiumRegistry() => Run<StadiumRegistryMenu>();
+        private void RunFootballStadiumRegistry() => Run<SortByLoss>();
 
    
     }

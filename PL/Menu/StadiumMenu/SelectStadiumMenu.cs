@@ -19,7 +19,7 @@ namespace PL
         {
             var fieldCollection = new FieldCollection(1);
 
-            fieldCollection.Add("Name Stadium", inputs[0].ToString());
+            fieldCollection.Add("Name Stadium", System.Enum.Parse<StadiumName>(inputs[0]));
             Run<ChangeStadiumMenu>(new InputParametersInitArgs(fieldCollection));
         }
     }

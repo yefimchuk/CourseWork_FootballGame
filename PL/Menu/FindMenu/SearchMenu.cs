@@ -20,7 +20,7 @@ namespace PL
             view.Add("========== Search Menu ==========");
             view.Add("1) Find Player");
             view.Add("2) Find Game");
-            view.Add("3) Get Doctor Stadium");
+            view.Add("3) Find Stadium");
             view.Add("Q) Back");
         }
 

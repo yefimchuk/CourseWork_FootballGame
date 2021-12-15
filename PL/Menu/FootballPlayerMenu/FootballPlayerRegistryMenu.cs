@@ -13,17 +13,18 @@ namespace PL
             binds.Add(ConsoleKey.D2, RunDeleteMenu);
             binds.Add(ConsoleKey.D3, RunChangeMenu);
             binds.Add(ConsoleKey.D4, RunShowMenu);
-
+            binds.Add(ConsoleKey.D5, RunShowPlayerMenu);
             BindExit(ConsoleKey.Q);
         }
 
         protected override void SetupView(List<string> view)
         {
-            view.Add("========== Doctors Registry ==========");
-            view.Add("1) Add");
-            view.Add("2) Delete");
-            view.Add("3) Change");
-            view.Add("4) Show");
+            view.Add("========== Player Registry ==========");
+            view.Add("1) Add player ");
+            view.Add("2) Delete player");
+            view.Add("3) Change player");
+            view.Add("4) Show all players");
+            view.Add("5) Show player");
             view.Add("Q) Back");
         }
 
@@ -34,6 +35,7 @@ namespace PL
         private void RunChangeMenu() => Run<SelectFootballPlayerMenu>();
 
         private void RunShowMenu() => Run<ShowFootballPlayerMenu>();
+        private void RunShowPlayerMenu() => Run<PlayerFindMenu>();
 
     }
 }

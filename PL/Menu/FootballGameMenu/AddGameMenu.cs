@@ -6,7 +6,7 @@ namespace PL
     public class AddGamenMenu : InitializationMenu
     {
       
-
+      
         protected override void SetupViewQueue()
         {
 

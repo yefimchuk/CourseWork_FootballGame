@@ -1,4 +1,5 @@
-﻿
+﻿using BLL;
+using System;
 namespace PL
 {
     class StadiumFindMenu : InitializationMenu
@@ -12,7 +13,7 @@ namespace PL
 
         protected override void OnInputFilled(string[] inputs)
         {
-            _processedInputs.Add("Name Stadium", inputs[0]);
+            _processedInputs.Add("Name Stadium", Enum.Parse<StadiumName>(inputs[0]));
 
         }
 

@@ -10,7 +10,54 @@ namespace BLL
         private static readonly DataContext _context;
         private static readonly Dictionary<Type, string> _pathes;
         private static ISet<IServiceComponent> _services;
+      /*  public void AddBookToReader(FieldCollection parameters, Book book)
+        {
+            IFieldComparable[] readers = ReceiveAll<Reader>(); //         checked is null
+            var finded = FindFirst<Reader>(readers, parameters);
+            finded.AddOffer(book);
+            _context.Serialize(_pathes[typeof(Reader)], readers, false);
+        }
 
+        public Book[] ShowBookFromReader(FieldCollection parameters)
+        {
+            IFieldComparable[] readers = ReceiveAll<Reader>(); //         checked is null
+            var finded = FindFirst<Reader>(readers, parameters);
+            return new List<Book>(finded.Books).ToArray();
+        }*/
+        public static void AddGamePlayer(FieldCollection parameters, FootballPlayer book)
+        {
+
+
+            FootballGame[] games = Load<FootballGame>();
+            var finded = games.Where(game => game.IsMatch(parameters)).ToArray();
+
+            for (int i = 0; i < finded.Length; i++)
+            {
+                finded[i].AddOffer(book);
+            }
+  
+            _context.Serialize(_pathes[typeof(FootballGame)], games, false);
+        }
+        public static void DeleteGamePlayer(FieldCollection parameters, FootballPlayer book)
+        {
+
+
+            FootballGame[] games = Load<FootballGame>();
+            var finded = games.Where(game => game.IsMatch(parameters)).ToArray();
+            for (int i = 0; i < finded.Length; i++)
+            {
+                finded[i].DeleteOffer(book);
+            }
+
+            _context.Serialize(_pathes[typeof(FootballGame)], games, false);
+        }
+
+        public static FootballGame[] ShowBookFromReader(FieldCollection parameters)
+        {
+            IFieldComparable[] readers = Load<FootballPlayer>(); //checked is null
+            FootballGame[] finded = Find<FootballGame>(parameters);
+            return new List<FootballGame>(finded).ToArray();
+        }
         static Registry()
         {
             _context = new DataContext();

@@ -7,9 +7,9 @@ namespace BLL
     [Serializable]
     public sealed class FootballStadium : ISerializable, IInitializable, IChangeable, IDemonstrated, IFieldComparable
     {
-        private int _numberSeats;
-        private int _priceSeat;
-        private StadiumName _nameStadion;
+        public int _numberSeats;
+        public int _priceSeat;
+        public StadiumName _nameStadion;
 
         public FootballStadium() { }
 
@@ -57,16 +57,17 @@ namespace BLL
                 $"Number of seats - {_numberSeats}\n" +
                 $"Price of seats - {_priceSeat}\n";
         }
-        void IChangeable.Change(FieldCollection parameters)
+
+        public void Change(FieldCollection parameters)
         {
             _numberSeats = parameters["Number of seats"];
             _priceSeat = parameters["Price of seats"];
 
         }
-
-        bool IFieldComparable.IsMatch(FieldCollection fields)
+  
+       public bool IsMatch(FieldCollection fields)
         {
-            return _nameStadion.ToString() == fields["Name Stadium"];
+            return _nameStadion == fields["Name Stadium"];
               
         }
 
